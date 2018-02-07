@@ -1,0 +1,86 @@
+﻿@model Crypo.Models.CryptoItemDetalModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/DetailPage.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
+
+</head>
+
+@functions{
+    DateTime timeNow = DateTime.Today;
+    
+}
+
+<div class="detail-container">
+    <div class="detail-content" style="padding:50px;">
+        <div class="detail-item">
+            <div class="detail-item detail-image">
+                <img src="~/images/@(Model.Symbol.ToLower() + "@2x").png" alt="Alternate Text" />
+            </div>
+            <div class="detail-item detail-text ">
+                <h2>@Model.Name</h2>
+                <div class="price-tag" style=" display:flex; flex-direction:row;">
+                    <h4>
+                        $@Model.USDprice
+                    </h4>
+                    <h5 @(Model.PercentChange_1h.Contains("-") ? Html.Raw("class='negative'") : Html.Raw("class='positive'"))>(@Model.PercentChange_1h%)</h5>
+
+                </div>
+                <a class="btn btn-info" href="https://www.coinbase.com/" style="margin-top:20px;">
+                    Buy @Model.Name
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="well col-md-push-7">
+        <div class="row">
+            <div class="center-row">
+
+                <h2 class="text-center"><b>Rank</b></h2>
+                <h4 class="text-center">#@Model.Rank</h4>
+                <h2 class="text-center"><b>Total Supply</b></h2>
+                <h4 class="text-center">@Model.TotalSupply</h4>
+                <h2 class="text-center"><b>Market cap</b></h2>
+                <h4 class="text-center">$@(Model.MarketCapUsd)</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="chartContainer">
+
+</div>
+<script type="text/javascript">
+
+
+    window.onload = function () {
+    var dpsa = @Html.Raw(ViewBag.Datapoints);
+        var chart = new CanvasJS.Chart("chartContainer", {
+			theme: "theme2",
+			animationEnabled: true,
+			title: {
+				text: "Simple Column Chart in ASP.NET MVC"
+			},
+			subtitles: [
+				{ text: "Try Resizing the Browser" }
+			],
+			data: [
+			{
+				type: "line", //change type to bar, line, area, pie, etc
+				dataPoints: dpsa,
+			}
+			]
+    });
+        chart.render();
+    };
+
+   
+</script>
+
+
+

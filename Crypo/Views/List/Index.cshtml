@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CrypyData.CrypoItem>;
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<div class="catalog-container">
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>1h Percent Change</th>
+                <th>24h Percent Change</th>
+                <th>7d Percent Change</th>
+                <th>Total Supply</th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach (var i in Model)
+    {
+            <tr class="catalog-row">
+                <td><img src="~/images/@(i.symbol.ToLower()+"@2x").png" alt="Alternate Text" height="20" width="20" /></td>
+                <td><a asp-controller="List" asp-action="Detail" asp-route-id="@i.id" style=" color:darkcyan;">@i.name</a></td>
+                <td>$@i.price_usd</td>
+                <td>@i.percent_change_1h%</td>
+                <td>@i.percent_change_24h%</td>
+                <td>@i.percent_change_7d%</td>
+                <td>$@i.total_supply</td>
+
+
+            </tr>
+
+}
+
+        </tbody>
+    </table>
+</div>
+

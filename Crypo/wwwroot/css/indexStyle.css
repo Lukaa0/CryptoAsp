@@ -1,0 +1,138 @@
+﻿body {
+    background-color: lightgray;
+}
+
+.cryptocontainer a {
+    text-decoration: none;
+}
+
+.container-content {
+    background-color:#dedede;
+    border: 1px solid grey;
+    margin-top: 1em;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+    .container-content h1 {
+        font-size: 12px;
+        text-align: center;
+        flex: 0 0 100%;
+    }
+
+        .container-content h1 span {
+            display: inline;
+            border: 1px solid grey;
+            background: #fff;
+            padding: 5px 10px;
+            position: relative;
+            top: -1.3em;
+        }
+
+.cryptocontainer .box:hover {
+    background-color: darkseagreen;
+    transition: 0.9s;
+   -webkit-transform:scale(1.09);
+   -moz-transform:scale(1.09);
+   transform:scale(1.09);
+   z-index:1;
+}
+
+
+.container-content span {
+    color: darkslategrey;
+    font-size: large;
+}
+
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.cryptocontainer {
+    background-color: lightgray;
+    margin: 10px;
+    padding: 40px;
+}
+
+.imgplace:hover {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.firsthalf {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.title a:hover, .right a:hover {
+    color: blue;
+    text-decoration: none;
+}
+
+.cryptocontainer .box {
+    transition:0.9s;
+    background-color: white;
+    margin: 8px;
+    border: 1px solid grey;
+    position: relative;
+    width: 200px;
+}
+
+
+
+.imgplace img {
+    background-repeat: no-repeat;
+    background-size: 100%;
+
+}
+
+
+.cryptocontainer .prices {
+    height: 30px;
+    margin-top: 30px;
+    border-top: 1px solid grey;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.cryptocontainer .title {
+    margin-top: 10px;
+}
+
+.prices .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border-right: 1px solid grey;
+}
+
+    .prices .left:hover {
+        background-color: #dedede;
+        transition: 0.9s;
+    }
+
+.prices .right:hover {
+    background-color: #dedede;
+    transition: 0.9s;
+}
+
+.prices .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
+}

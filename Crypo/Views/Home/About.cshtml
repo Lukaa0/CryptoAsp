@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+@model CrypyData.HistoricData;
+    @Model.Type=100;
+@foreach (var item in Model.Data)
+{
+    <p>@item</p>
+
+}
