@@ -5,41 +5,37 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/indexStyle.css">
 </head>
-<div class="cryptocontainer">
-
-    <div class="container-content">
-        <h1><span>ALL COINS</span></h1>
-
-        @foreach(var item in Model)
-
-            {
-
-                <div class="box">
-                    <div class="firsthalf">
-                        <div class="imgplace" >
-                            <img src="~/images/@(item.symbol.ToLower()+"@2x").png" alt="@(item.symbol.ToLower()+"@2x").png" height="50" width="50"/>
-                        </div>
-                        <div class="title">
-                            <a asp-controller="List" asp-action="Detail" asp-route-id="@item.id">@item.name</a>
-                            <span> (@item.symbol)</span>
-                        </div>
-                    </div>
-                    <div class="prices">
-                        <div class="left"><a asp-controller="List" asp-action="Detail" asp-route-id="@item.id">@item.price_usd$</a></div>
-                        <div class="right">
-
-                            <a @(item.percent_change_1h.Contains("-") ? Html.Raw("class='negative'") : Html.Raw("class='positive'")) asp-controller="List" asp-action="Detail" asp-route-id="@item.id">
-                                @item.percent_change_1h%
-                            </a>
-                        </div>
-                    </div>
 
 
+<div class="container-content">
+    <h1><span>ALL COINS</span></h1>
+    @foreach (var item in Model)
+
+    {
+
+        <div class="box">
+            <div class="firsthalf">
+                <div class="imgplace">
+                    <img src="~/images/@(item.symbol.ToLower()+"@2x").png" alt="Not found" onerror="this.onerror=null;this.src='/images/errorImg.jpg'" height="50" width="50" />
                 </div>
+                <div class="title">
+                    <a asp-controller="List" asp-action="Detail" asp-route-id="@item.id">@item.name</a>
+                    <span> (@item.symbol)</span>
+                </div>
+            </div>
+            <div class="prices">
+                <div class="left"><a asp-controller="List" asp-action="Detail" asp-route-id="@item.id">@item.price_usd$</a></div>
+                <div class="right">
+                    <a @(item.percent_change_1h.Contains("-") ? Html.Raw("class='negative'") : Html.Raw("class='positive'")) asp-controller="List" asp-action="Detail" asp-route-id="@item.id">
+                        @item.percent_change_1h%
+                    </a>
+                </div>
+            </div>
 
-            }
+        </div>
 
-        
-    </div>
+    }
 
 </div>
+
+

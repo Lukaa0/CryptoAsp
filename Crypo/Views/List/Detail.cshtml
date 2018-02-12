@@ -11,10 +11,7 @@
 
 </head>
 
-@functions{
-    DateTime timeNow = DateTime.Today;
-    
-}
+
 
 <div class="detail-container">
     <div class="detail-content" style="padding:50px;">
@@ -51,35 +48,93 @@
         </div>
     </div>
 </div>
+<hr />
+<div class="drpList" style="position:relative;z-index:1; float:right;">
+    <select class="form-control" id="ddlViewBy" style="width:150px;">
+        <option value="1" selected="selected">Close</option>
+        <option value="2">High</option>
+        <option value="1">Low</option>
+        <option value="1">Open</option>
+        <option value="1">High</option>
+    </select>
+
+</div>
+
+<script>
+
+</script>
 
 <div id="chartContainer">
 
 </div>
 <script type="text/javascript">
+    var e = document.getElementById("ddlViewBy");
+    var strUser = e.options[e.selectedIndex].text;
+    var strType = strUser.toLowerCase()
 
 
-    window.onload = function () {
-    var dpsa = @Html.Raw(ViewBag.Datapoints);
-        var chart = new CanvasJS.Chart("chartContainer", {
-			theme: "theme2",
-			animationEnabled: true,
-			title: {
-				text: "Simple Column Chart in ASP.NET MVC"
-			},
-			subtitles: [
-				{ text: "Try Resizing the Browser" }
-			],
-			data: [
-			{
-				type: "line", //change type to bar, line, area, pie, etc
-				dataPoints: dpsa,
-			}
-			]
+    $.get("/api/api/@Model.Symbol.ToUpper()/USD/60/3/" + strType, function (data) {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    backgroundColor: "#dedede",
+                    animationEnabled: true,
+                    title: {
+                        text: "Price Chart"
+                    },
+                    axisX: {
+                        valueFormatString: "DD-MMM-YYYY"
+                    },
+                    subtitles: [
+                        { text: "@Model.Name" }
+                    ],
+                    data: [
+                        {
+                            xValueType:"dateTime",
+                            type: "spline",
+                            dataPoints: data,
+                        }
+                    ]
+                });
+                chart.render();
+            });
+
+
+
+
+                $('body').on('change', '#ddlViewBy', function () {
+
+     $(document).ready(function () {
+         var strUser = e.options[e.selectedIndex].text;
+         var strType = strUser.toLowerCase()
+
+
+        $.get("/api/api/@Model.Symbol.ToUpper()/USD/60/3/" + strType, function (data) {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    backgroundColor: "#dedede",
+                    animationEnabled: true,
+                    title: {
+                        text: "Price Chart"
+                    },
+                    axisX: {
+                        valueFormatString: "DD-MMM-YYYY"
+                    },
+                    subtitles: [
+                        { text: "@Model.Name" }
+                    ],
+                    data: [
+                        {
+                            xValueType:"dateTime",
+                            type: "spline",
+                            dataPoints: data,
+                        }
+                    ]
+                });
+                chart.render();
+            });
+
+
+    })
     });
-        chart.render();
-    };
 
-   
 </script>
 
 

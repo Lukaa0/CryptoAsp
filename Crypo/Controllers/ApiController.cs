@@ -30,16 +30,18 @@ namespace Crypo.Controllers
             return new string[] { "value1", "value2" };
         }
 
+     
+
         // GET: api/Api/5
         [HttpGet("{id}", Name = "Get")]
-        public List<CryptoItemModel> Get(int id)
+        public List<CryptoItemModel> Get(string id)
         {
             var jString = new WebClient().DownloadString("https://api.coinmarketcap.com/v1/ticker/");
             List<CryptoItemModel> CryptoItemList = new List<CryptoItemModel>();
             var inData = JsonConvert.DeserializeObject<List<CrypoItem>>(jString);
-            foreach(var item in inData)
+            foreach (var item in inData)
             {
-                var path = Path.Combine(_hostingEnvironment.WebRootPath+"/images", $"{item.symbol.ToLower()}@2x.png");
+                var path = Path.Combine(_hostingEnvironment.WebRootPath + "/images", $"{item.symbol.ToLower()}@2x.png");
                 CryptoItemModel cryptoItemModel = new CryptoItemModel()
                 {
                     last_updated = item.last_updated,
@@ -55,16 +57,45 @@ namespace Crypo.Controllers
                     symbol = item.symbol,
                     total_supply = item.total_supply,
                     volume_usd_24h = item.volume_usd_24h
-                
+
                 };
-                
+
                 cryptoItemModel.imgUrl = path;
                 CryptoItemList.Add(cryptoItemModel);
             }
 
             return CryptoItemList;
         }
-       
+        [HttpGet("{symbol}/{tsymbol}/{limit}/{aggregate}/{type}", Name = "Historic Data")]
+        public Datapoints[] GetHistoricalData(string symbol, string tsymbol, int limit, int aggregate, string type)
+        {
+            var apiString = new WebClient().DownloadString("https://min-api.cryptocompare.com/data/histoday?fsym=" + symbol + "&tsym=" + tsymbol + "&limit=" + limit + "&aggregate=" + aggregate + "&e=CCCAGG");
+            var histoData = JsonConvert.DeserializeObject<HistoDay>(apiString);
+            var rootData = histoData.Data;
+            var dataPoints = new List<Datapoints>();
+            
+         
+            for(int i =0; i< rootData.Count(); i++)
+            {
+                rootData[i].PriceType = type;
+                Type myType = typeof(HistoDayData);
+                var Props = myType.GetProperties();
+                for(int v = 0; v < Props.Length; v++)
+                {
+                   
+                    if(rootData[i].PriceType == Props[v].Name)
+                    {
+                        rootData[i].PriceType = Props[v].GetValue(rootData[i]).ToString();
+                    }
+                }
+                
+
+                dataPoints.Add(new Datapoints(Convert.ToInt64(rootData[i].time) * 1000, double.Parse(rootData[i].PriceType, System.Globalization.CultureInfo.InvariantCulture)));
+            }
+            var arrayPoints =dataPoints.ToArray();
+            return arrayPoints;
         }
+
+    }
     }
 

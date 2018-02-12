@@ -13,5 +13,6 @@ namespace CrypyData
         public string close { get; set; }
         public string volumefrom { get; set; }
         public string volumeto { get; set; }
+        public string PriceType { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Crypo.Models
     {
        
         
-        public Datapoints(int X, double Y)
+        public Datapoints(long X, double Y)
         {
             x = X;
             y = Y;
@@ -19,7 +19,7 @@ namespace Crypo.Models
        
         
 
-        public  int x { get; set; }
+        public  long x { get; set; }
         public double y { get; set; }
     }
 }

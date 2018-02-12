@@ -1,13 +1,29 @@
 ﻿body {
-    background-color: lightgray;
+    background: gray url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/particle-fire-updraft_-yaikob-h__F0000.png) repeat 0 0 fixed;
+    background-size: cover;
+    width: 100%;
+    text-align: center;
+    height: 300px;
+    padding-top: 120px;
+    box-sizing: border-box;
+    -webkit-animation: slide 20s linear infinite;
+}
+@-webkit-keyframes slide {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -400px 0;
+    }
 }
 
-.cryptocontainer a {
+ a {
     text-decoration: none;
 }
 
 .container-content {
-    background-color:#dedede;
+    background-color: transparent;
     border: 1px solid grey;
     margin-top: 1em;
     display: flex;
@@ -31,7 +47,7 @@
             top: -1.3em;
         }
 
-.cryptocontainer .box:hover {
+.container-content .box:hover {
     background-color: darkseagreen;
     transition: 0.9s;
    -webkit-transform:scale(1.09);
@@ -54,19 +70,13 @@
     color: red;
 }
 
-.cryptocontainer {
-    background-color: lightgray;
-    margin: 10px;
-    padding: 40px;
-}
-
 .imgplace:hover {
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
 
-.firsthalf {
+.container-content .firsthalf {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -80,9 +90,10 @@
     text-decoration: none;
 }
 
-.cryptocontainer .box {
+.container-content .box {
     transition:0.9s;
     background-color: white;
+    opacity:0.8;
     margin: 8px;
     border: 1px solid grey;
     position: relative;
@@ -91,14 +102,14 @@
 
 
 
-.imgplace img {
+.container-content .imgplace img {
     background-repeat: no-repeat;
     background-size: 100%;
 
 }
 
 
-.cryptocontainer .prices {
+.container-content .prices {
     height: 30px;
     margin-top: 30px;
     border-top: 1px solid grey;
@@ -107,11 +118,11 @@
     flex-direction: row;
 }
 
-.cryptocontainer .title {
+.container-content .title {
     margin-top: 10px;
 }
 
-.prices .left {
+.container-content .prices .left {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,17 +130,17 @@
     border-right: 1px solid grey;
 }
 
-    .prices .left:hover {
+  .container-content .prices .left:hover {
         background-color: #dedede;
         transition: 0.9s;
     }
 
-.prices .right:hover {
+.container-content .prices .right:hover {
     background-color: #dedede;
     transition: 0.9s;
 }
 
-.prices .right {
+.container-content .prices .right {
     display: flex;
     justify-content: center;
     align-items: center;

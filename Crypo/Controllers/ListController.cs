@@ -36,15 +36,9 @@ namespace Crypo.Controllers
                 Rank = item.rank
 
             };
-            Random rnd = new Random();
-            int randomNum = rnd.Next(1, 20);
-             List<Datapoints> datapoints = new List<Datapoints>();
-            datapoints.Add(new Datapoints(randomNum, double.Parse(detailModel.USDprice, System.Globalization.CultureInfo.InvariantCulture)));
-            var jsonString = JsonConvert.SerializeObject(datapoints);
 
 
 
-            ViewBag.Datapoints = jsonString;
             return View(detailModel);
         }
 

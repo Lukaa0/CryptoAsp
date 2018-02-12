@@ -1,6 +1,7 @@
 ﻿body {
-    background-color:#dedede;
+    background-color: white;
 }
+
 .detail-content{
     margin-top:100px;
     display:flex;
